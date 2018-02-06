@@ -126,18 +126,58 @@ class EntrepriseTest2Controller extends Controller
             ));
        }
 
+       /**
+     * @Route("/delete", name="delete_entreprise")
+     */
+      public function deleteAction(Request $request)
+      {
+
+        $form = $this->createForm('AppBundle\Form\DeleteType');
+        $form->handleRequest($request);
+        $mess = "Recherche";
+
+        /* On regarde si le formulaire a été soumis */
+
+        if ($form->isSubmitted() && $form->isValid()) {
+                $data = $request->request->get('appbundle_recherche');
+                dump($data['mot_cle']);
+
+                $em = $this->getDoctrine()->getManager();
+                $test = $em->getRepository('AppBundle:EntrepriseTest')->deleteEntry($data['mot_cle']);
+                dump($test);
+
+                return $this->render('/entreprisetest2/Envoie.html.twig', array(
+                   'result' => $test,
+                   'mess' => $mess,
+                   'form' => $form->createView(),
+                )); 
+            }
+
+        /* Si c'est la cas, je récupère le mot clé saisie */
+        /* Puis je fais une requète de type like pour récupérer les enterprises qui contiennent le mots clés saisies */
+        $mess = "Rien d'entré";
+        return $this->render('/entreprisetest2/Envoie.html.twig', array(
+               'mess' => $mess,
+               'form' => $form->createView(),
+            ));     
+          }
+
+
+
+
+
 
     /**
      * @Route("/delete", name="delete_entreprise")
      */
-      public function deleteAction(Request $request)
+     /* public function deleteAction(Request $request)
       {
         $entreprise = new EntrepriseTest();
         $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $entreprise);
         $formBuilder
           ->add('nom', ChoiceType::class, [
                 'choice_label' => function($entreprise, $key, $index) {
-        /** @var entrepriseTest $entrepriseTest */
+        /** @var entrepriseTest $entrepriseTest *//*
                     return $entrepriseTest->getNom();
                 }]
             )
@@ -165,7 +205,7 @@ class EntrepriseTest2Controller extends Controller
         return $this->render('entreprisetest2/creation.html.twig', array(
               'form' => $form->createView(),
             ));
-       }
+       }*/
 
 
 }
