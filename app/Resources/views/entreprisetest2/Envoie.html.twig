@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+       
+    </head>
+    <body>
+        {% block body %}
+
+            {{ mess }}
+
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <input type="submit" value="Search" />
+            {{ form_end(form) }}
+
+            {% for results in result %}
+                {{ results.nom }}</br>
+                {{ results.siret }}</br>
+                {{ results.commentaire }}</br>
+            {% endfor %}
+
+           
+
+        {% endblock %}
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

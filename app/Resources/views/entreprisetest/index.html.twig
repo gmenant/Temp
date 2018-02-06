@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{{ recherche }}
+    <h1>Entreprisetests list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Siret</th>
+                <th>Commentaire</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entrepriseTest in entrepriseTests %}
+            <tr>
+                <td><a href="{{ path('entreprisetest_show', { 'id': entrepriseTest.id }) }}">{{ entrepriseTest.id }}</a></td>
+                <td>{{ entrepriseTest.nom }}</td>
+                <td>{{ entrepriseTest.siret }}</td>
+                <td>{{ entrepriseTest.commentaire }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('entreprisetest_show', { 'id': entrepriseTest.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('entreprisetest_edit', { 'id': entrepriseTest.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('entreprisetest_new') }}">Create a new entrepriseTest</a>
+        </li>
+    </ul>
+{% endblock %}

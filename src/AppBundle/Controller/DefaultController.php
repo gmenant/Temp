@@ -5,6 +5,9 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\EntrepriseTest;
 
 class DefaultController extends Controller
 {
@@ -19,3 +22,5 @@ class DefaultController extends Controller
         ]);
     }
 }
+
+
